@@ -91,3 +91,8 @@ export async function upsertArtist(artist) {
         console.error('Erreur lors de l\'ajout ou de la modification de l\'artiste :', error);
     }
 }
+
+//Fonction pour le PBimage
+export function getFileURL(record, field, thumb) {
+  return field ? pb.files.getURL(record, field, { thumb }) : null;
+}

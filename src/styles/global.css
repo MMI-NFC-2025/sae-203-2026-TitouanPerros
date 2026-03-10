@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@theme {
+  --color-white: oklch(100% 0 0); /* #ffffff */
+  --color-green: oklch(72.61% 0.1385 128.8); /* #8AB752 */
+  --color-dark: oklch(4.43% 0.0126 253.1); /* #010811 */
+  --font-sans: 'Montserrat Variable', sans-serif;
+  --text-gros-titre: 1.5rem;    /* 24px */
+  --text-sous-titre: 1.25rem;   /* 20px */
+  --text-normal: 1.125rem;      /* 18px */
+  --text-normal-2: 1rem;        /* 16px */
+  --text-petit: 0.875rem;       /* 14px */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply font-sans text-base leading-normal;
+  }
+  h1 {
+    @apply font-sans text-4xl leading-tight lg:text-6xl;
+  }
+  h2 {
+    @apply font-sans text-2xl leading-tight lg:text-4xl;
+  }
+  h3 {
+    @apply my-4 font-sans text-xl leading-tight font-bold;
+  }
+}
+
+
+@layer components {
+  .grille {
+    @apply px-6 lg:grid lg:grid-cols-(--my-grid) lg:justify-center lg:gap-12;
+  }
+}

@@ -1,10 +1,58 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Ticket from '../assets/icons/ticket.svg';
+import heroImg from '../assets/image/imagemenu.avif';
+import concertImg from '../assets/image/image3.avif';
+import Button from '../components/Button.astro';
+import Fleche from '../assets/icons/arrow1.svg';
 ---
 
 <Layout>
-	<h1>Welcome to Astro!</h1>
+  <!-- Hero -->
+  <section id="top" class="relative flex min-h-screen flex-col items-start justify-center gap-6 px-6 py-24">
+    <img src={heroImg.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 flex flex-col gap-20 mx-auto">
+      <Button href="/programme" text="6-7 Juin 2026" classes="mx-auto" />
+      <h2 class="text-white">Flying TapFest</h2>
+      <div class="flex flex-col gap-3">
+        <Button href="/programme" text="Réserver mes billets" classes="mx-auto" />
+        <Button href="/programme" text="Le programme" variant="outlined" classes="mx-auto" />
+      </div>
+    </div>
+    <Button href="/programme" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0">
+    <Ticket/>
+    </Button>
+  </section>
+
+  <!-- Cards -->
+  <section class="flex flex-col gap-4 bg-white px-6 py-10">
+    <a href="/programme" class="flex flex-col gap-2 rounded-2xl bg-dark p-6 text-white">
+      <h3 class="text-gros-titre text-white">Programme du Flying TapFest</h3>
+      <p class="text-petit text-gray-400">Découvrez tous les spectacles et horaires</p>
+    </a>
+    <a href="/artistes" class="flex flex-col gap-2 rounded-2xl bg-dark p-6 text-white">
+      <h3 class="text-gros-titre text-white">Les Artistes</h3>
+      <p class="text-petit text-gray-400">Découvrez tout les artistes sur place</p>
+    </a>
+    <a href="/infos" class="flex flex-col gap-2 rounded-2xl bg-dark p-6 text-white">
+      <h3 class="text-gros-titre text-white">Infos Pratiques</h3>
+      <p class="text-petit text-gray-400">Tout savoir sur l'hébergement, les tarifs, l'accès</p>
+    </a>
+  </section>
+
+  <!-- Concert image -->
+  <section class="relative h-[539px]">
+    <img src={concertImg.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 flex h-full min-h-64 flex-col items-start justify-end gap-4 p-6">
+    <Button href="/programme" text="Réserver vos billets">
+      <Ticket />
+    </Button>
+    </div>
+    <Button href="#top" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0">
+    <Fleche />
+    </Button>
+  </section>
+
 </Layout>

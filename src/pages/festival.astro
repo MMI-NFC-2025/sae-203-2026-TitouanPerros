@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeamCard from '../components/TeamCard.astro';
+import ValueCard from '../components/ValueCard.astro';
+import Logo from '../assets/icons/logosurfondblanc.svg';
+import Equipe from '../assets/icons/equipe.svg';
+import Valeur from '../assets/icons/valeur.svg';
+import heroImg from '../assets/image/imagemenu.avif';
+---
+
+<Layout>
+  <!-- ─────────────────────────────── HERO ─────────────────────────────── -->
+  <section class="relative flex min-h-[40vh] items-end justify-start px-6 pb-12 pt-32">
+    <img
+      src={heroImg.src}
+      alt="Spectacle Flying TapFest"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/55"></div>
+    <div class="relative z-10 w-full text-center">
+      <h1 class="text-white text-3xl font-bold">Le Flying TapFest</h1>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── NOTRE HISTOIRE ─────────────────────────────── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <div class="flex items-center gap-3">
+      <Logo class="w-8 h-8 shrink-0" />
+      <h2 class="text-dark m-0">Notre Histoire</h2>
+    </div>
+    <p class="text-dark/80 text-sm leading-relaxed">
+      Le Flying Tap Fest est né d'une idée audacieuse : réunir deux univers que tout oppose en
+      apparence ; la danse de claquettes et la technologie des drones pour créer un festival
+      totalement inédit. À l'origine du projet, une équipe de passionnés cherchant à repousser les
+      frontières de la créativité et à imaginer une expérience artistique hors du commun.
+    </p>
+    <p class="text-dark/80 text-sm leading-relaxed">
+      L'histoire commence avec une question simple : et si le rythme des claquettes pouvait
+      rencontrer le mouvement aérien des drones ? De cette réflexion est née une vision : mêler la
+      précision percussive des danseurs avec la poésie visuelle de chorégraphies aériennes. Le
+      résultat : un festival hybride, moderne et spectaculaire, où la tradition rencontre
+      l'innovation.
+    </p>
+  </section>
+
+  <!-- ─────────────────────────────── NOTRE ÉQUIPE ─────────────────────────────── -->
+  <section class="bg-dark px-6 py-12 flex flex-col gap-6">
+    <div class="flex items-center gap-3">
+      <Equipe class="w-8 h-8 shrink-0" />
+      <h2 class="text-white m-0">Notre équipe</h2>
+    </div>
+    <p class="text-gray-400 text-sm">Découvrez notre équipe de passionnée et dévouée</p>
+    <div class="flex flex-col gap-4">
+      <TeamCard
+        name="Marie Collin"
+        role="Directrice Artistique"
+        imageSrc="https://i.pravatar.cc/150?img=47"
+        imageAlt="Portrait de Marie Collin"
+      />
+      <TeamCard
+        name="Luis Miguel"
+        role="Directeur technique"
+        imageSrc="https://i.pravatar.cc/150?img=12"
+        imageAlt="Portrait de Luis Miguel"
+      />
+      <TeamCard
+        name="Maxime Julio"
+        role="Responsable communication"
+        imageSrc="https://i.pravatar.cc/150?img=15"
+        imageAlt="Portrait de Maxime Julio"
+      />
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────── NOS VALEURS ─────────────────────────────── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <div class="flex items-center gap-3">
+      <Valeur class="w-8 h-8 shrink-0" />
+      <h2 class="text-dark m-0">Nos Valeurs</h2>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <!-- Écologie -->
+      <ValueCard icon="🌿" title="Écologie" variant="green">
+        <p class="font-semibold mb-2">Un festival éco-responsable</p>
+        <p class="mb-2">Nos objectifs :</p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Réduire au maximum l'impact environnemental du festival.</li>
+          <li>Encourager le tri sélectif et la réduction des déchets.</li>
+          <li>Limiter les consommations d'énergie (notamment pour les drones et les éclairages).</li>
+          <li>Sensibiliser le public et les artistes à des pratiques durables.</li>
+        </ul>
+      </ValueCard>
+
+      <!-- Accessibilité -->
+      <ValueCard icon="♿" title="Accessibilité" variant="green">
+        <p class="font-semibold mb-2">Un festival qui se veut accessible à tous</p>
+        <p>
+          Notre festival est ouvert à tous, avec des tarifs adaptés et des espaces accessibles pour
+          permettre au plus grand nombre de découvrir cet art.
+        </p>
+      </ValueCard>
+
+      <!-- Thématique -->
+      <ValueCard icon="🎭" title="Thématique" variant="dark">
+        <p>
+          Le Flying TapFest célèbre la rencontre entre le rythme des claquettes et la danse
+          aérienne des drones. Deux univers se répondent : le son du sol dialogue avec la lumière
+          du ciel, créant une expérience artistique unique et surprenante.
+        </p>
+      </ValueCard>
+    </div>
+  </section>
+</Layout>

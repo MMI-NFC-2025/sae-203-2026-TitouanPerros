@@ -1,0 +1,21 @@
+---
+interface Props {
+  icon: string;       // emoji ou caractère texte
+  title: string;
+  variant?: 'green' | 'dark';
+}
+
+const { icon, title, variant = 'green' } = Astro.props;
+
+const bg = variant === 'dark' ? 'bg-dark' : 'bg-dark border border-green';
+const titleColor = 'text-white';
+const textColor = variant === 'dark' ? 'text-gray-300' : 'text-white/90';
+---
+
+<div class:list={["rounded-2xl p-6 flex flex-col gap-3", bg]}>
+  <span class="text-2xl">{icon}</span>
+  <h3 class:list={["mt-0 mb-1 text-base font-bold", titleColor]}>{title}</h3>
+  <div class:list={["text-sm leading-relaxed", textColor]}>
+    <slot />
+  </div>
+</div>

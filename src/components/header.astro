@@ -1,0 +1,64 @@
+---
+import Logo from '../assets/icons/logo.svg';
+---
+<header class="header fixed bg-black w-full flex items-center justify-between px-6 lg:grid lg:grid-cols-8 z-100"> 
+  <div class="py-8 lg:col-start-1 lg:col-span-4">
+    <a href="/" aria-label="Accueil" class="flex flex-row gap-3 items-center">
+      <Logo />
+      <p class="text-white text-base">Flying Tap Fest</p>
+    </a>
+  </div>
+  
+  <div class="py-8 lg:col-start-8 lg:col-span-1 lg:px-10 flex justify-center items-center">
+      <button
+      id="menu-btn"
+      aria-label="Menu"
+      aria-controls="menu"
+      aria-expanded="false"
+      class="group relative z-[60] flex h-6 w-8 flex-col justify-between *:h-0.5 *:w-full *:bg-white *:transition-all *:duration-300"
+    >
+      <span
+      class="group-aria-expanded:translate-y-[10.5px] group-aria-expanded:rotate-45"></span>
+      <span class="group-aria-expanded:opacity-0"></span>
+      <span class="group-aria-expanded:-translate-y-[10.5px] group-aria-expanded:-rotate-45"></span>
+    </button>
+  </div>
+
+  <!-- Navigation -->
+    <nav
+      class="fixed inset-0 z-50 bg-black text-2xl text-white transition-all duration-300 ease-in-out invisible opacity-0 aria-[hidden=false]:visible aria-[hidden=false]:opacity-100"
+      id="menu"
+      aria-hidden="true"
+    >
+      <div class="mx-8 mt-8 flex flex-row gap-3 items-center">
+        <Logo class="w-10 h-10" />
+        <p class="text-white text-base">Flying Tap Fest</p>
+      </div>
+      <ul class="mx-16 mt-16">
+        <li>
+          <a class="block px-5 py-4" href="/">Acceuil</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/festival">Le festival</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/agenda">Programme</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/contact">Artistes</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/inscription">Scènes</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/inscription">Infos pratiques</a>
+        </li>
+        <li>
+          <a class="block px-5 py-4" href="/inscription">Contact</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<script src="../js/header.js"></script>
+  
