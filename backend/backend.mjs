@@ -1,5 +1,5 @@
 import PocketBase from 'pocketbase';
-const pb = new PocketBase('http://127.0.0.1:8090/');
+const pb = new PocketBase('https://flyingtapfest.titouan-perros.fr:443');
 
 //Fonction 1 : retourne la liste de tous les artistes triés par date de représentation
 export async function getAllArtists() {
