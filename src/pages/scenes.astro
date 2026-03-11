@@ -22,7 +22,7 @@ const scenesWithArtists = scenes.map((scene) => ({
   <!-- ─── Hero ─── -->
   <section class="relative flex min-h-[40vh] flex-col items-center justify-center px-6 py-12 text-center">
     <div class="absolute inset-0 overflow-hidden">
-      <img src={parcImg.src} alt="" class="h-full w-full object-cover" />
+      <img src={parcImg.src} alt="" loading="eager" decoding="async" class="h-full w-full object-cover" />
     </div>
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="relative z-10">

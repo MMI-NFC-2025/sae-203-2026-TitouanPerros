@@ -1,5 +1,5 @@
 ---
-import { formatHeure, formatJour } from '../../backend/backend.mjs';
+import { formatHeure, formatJour, slugify } from '../../backend/backend.mjs';
 import ImagePb from './ImagePb.astro';
 
 interface Props {
@@ -16,7 +16,7 @@ const { record, nom, scene, genre, date, photo, description } = Astro.props;
 const jourHeure = date
   ? `${formatJour(date as string)} ${formatHeure(date as string)}`
   : null;
-const href = `/artistes/${encodeURIComponent(nom)}`;
+const href = `/artistes/${slugify(nom)}`;
 ---
 
 <a href={href} class="group flex flex-col overflow-hidden rounded-2xl transition hover:opacity-90">

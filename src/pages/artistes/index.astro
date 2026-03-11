@@ -11,7 +11,7 @@ const artists = (await getAllArtistsSorted()) ?? [];
   <!-- ─── Hero ─── -->
   <section class="relative flex min-h-[50vh] flex-col items-center justify-center px-6 py-12 text-center">
     <div class="absolute inset-0 overflow-hidden">
-      <img src={claquettImg.src} alt="" class="h-full w-full object-cover" />
+      <img src={claquettImg.src} alt="" loading="eager" decoding="async" class="h-full w-full object-cover" />
     </div>
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 flex flex-col items-center gap-4">

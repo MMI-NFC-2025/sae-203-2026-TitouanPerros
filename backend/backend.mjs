@@ -125,6 +125,17 @@ export async function getArtistByName(nom) {
   }
 }
 
+// Convertit un nom en slug URL-friendly : "Melinda Rebék" → "melinda-rebek"
+export function slugify(str) {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 // Fonction 10 : enregistre un message de contact dans PocketBase
 export async function submitContact({ nom, email, sujet, message }) {
   try {

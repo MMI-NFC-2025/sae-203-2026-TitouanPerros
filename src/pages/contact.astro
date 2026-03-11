@@ -36,7 +36,7 @@ if (Astro.request.method === 'POST') {
 <Layout>
   <!-- ─── Hero ─── -->
   <section class="relative flex min-h-[50vh] flex-col items-center justify-center px-6 py-12 text-center">
-    <img src={heroImg.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <img src={heroImg.src} alt="" loading="eager" decoding="async" class="absolute inset-0 h-full w-full object-cover" />
     <div class="absolute inset-0 bg-black/60"></div>
     <div class="relative z-10 flex flex-col items-center gap-4">
       <h1 class="text-white">Contact</h1>

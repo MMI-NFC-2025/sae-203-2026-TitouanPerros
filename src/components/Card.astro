@@ -61,6 +61,8 @@ const IconComp = typeof icon === 'function' ? (icon as SvgIcon) : null;
       alt={imageAlt}
       width="64"
       height="64"
+      loading="lazy"
+      decoding="async"
       class="h-16 w-16 shrink-0 rounded-full object-cover shadow-md"
     />
   )}
