@@ -1,0 +1,96 @@
+---
+/**
+ * Composant Card générique — gère deux types visuels :
+ *   • "team"  → layout horizontal (photo ronde + texte), fond légèrement transparent
+ *   • "value" → layout vertical (icône + titre + contenu), fond sombre + bordure verte
+ *   • "dark"  → layout vertical, fond sombre sans bordure (ex : carte Thématique)
+ */
+
+type SvgIcon = (_props: Record<string, unknown>) => unknown;
+
+interface Props {
+  /** Nom affiché en gras */
+  title?: string;
+  /** Sous-titre ou rôle (gris clair) */
+  subtitle?: string;
+  /** Emoji string OU composant SVG importé */
+  icon?: string | SvgIcon;
+  /** URL de la photo ronde (cartes équipe) */
+  imageSrc?: string;
+  imageAlt?: string;
+  /** Style visuel */
+  variant?: 'value' | 'dark' | 'team';
+  /** true = photo/icône à gauche, texte à droite */
+  horizontal?: boolean;
+  classes?: string;
+}
+
+const {
+  title,
+  subtitle,
+  icon,
+  imageSrc,
+  imageAlt = '',
+  variant = 'value',
+  horizontal = false,
+  classes,
+} = Astro.props;
+
+const bg: Record<string, string> = {
+  value: 'bg-dark border border-green',
+  dark: 'bg-dark',
+  team: 'bg-white/5',
+};
+
+// Composant SVG dynamique (doit être en majuscule pour JSX)
+const IconComp = typeof icon === 'function' ? (icon as SvgIcon) : null;
+---
+
+<div
+  class:list={[
+    'rounded-2xl p-5 gap-4',
+    horizontal ? 'flex items-center' : 'flex flex-col',
+    bg[variant],
+    classes,
+  ]}
+>
+  <!-- Photo ronde (cartes équipe) -->
+  {imageSrc && (
+    <img
+      src={imageSrc}
+      alt={imageAlt}
+      width="64"
+      height="64"
+      class="h-16 w-16 shrink-0 rounded-full object-cover shadow-md"
+    />
+  )}
+
+  <!-- Icône (emoji ou SVG) -->
+  {icon && (
+    <span class="shrink-0 text-2xl leading-none">
+      {typeof icon === 'string'
+        ? icon
+        : IconComp && <IconComp class="h-6 w-6" />}
+    </span>
+  )}
+
+  <!-- Texte -->
+  <div class:list={['flex flex-col gap-1', horizontal && 'flex-1']}>
+    {title && (
+      <p
+        class:list={[
+          'font-bold text-white',
+          horizontal ? 'text-normal-2' : 'text-sous-titre',
+        ]}
+      >
+        {title}
+      </p>
+    )}
+    {subtitle && (
+      <p class="text-petit text-gray-400">{subtitle}</p>
+    )}
+    <div class="text-petit leading-relaxed text-white/90">
+      <slot />
+    </div>
+  </div>
+</div>

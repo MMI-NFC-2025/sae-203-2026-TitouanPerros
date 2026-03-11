@@ -5,6 +5,7 @@
   --color-green: oklch(72.61% 0.1385 128.8); /* #8AB752 */
   --color-dark: oklch(4.43% 0.0126 253.1); /* #010811 */
   --font-sans: 'Montserrat Variable', sans-serif;
+  --my-grid: repeat(3, minmax(0, 1fr));
   --text-gros-titre: 1.5rem;    /* 24px */
   --text-sous-titre: 1.25rem;   /* 20px */
   --text-normal: 1.125rem;      /* 18px */
