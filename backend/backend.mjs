@@ -128,7 +128,7 @@ export async function getArtistByName(nom) {
 // Fonction 10 : enregistre un message de contact dans PocketBase
 export async function submitContact({ nom, email, sujet, message }) {
   try {
-    const record = await pb.collection('contact').create({ nom, email, sujet, message });
+    const record = await pb.collection('utilisateur').create({ Nom: nom, Mail: email, Sujet: sujet, Message: message });
     return { success: true, record };
   } catch (error) {
     console.error('Erreur lors de l\'envoi du message :', error);
