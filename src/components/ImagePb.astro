@@ -1,23 +1,16 @@
 ---
-import { Picture } from "astro:assets";
 import { getFileURL } from "../../backend/backend.mjs";
-const { record, field, alt, classPicture, classImg, thumb, layout } =
-  Astro.props;
-const VALID_LAYOUTS = ["constrained", "full-width", "fixed", "none"];
-const resolvedLayout = VALID_LAYOUTS.includes(layout) ? layout : "constrained";
+const { record, field, alt, classPicture, classImg, thumb } = Astro.props;
 const imageUrl = record && field ? getFileURL(record, field, thumb) : null;
 ---
 
 {
   imageUrl && (
-    <Picture
-      pictureAttributes={{ class: classPicture }}
-      class={classImg}
-      inferSize={true}
-      layout={resolvedLayout}
-      formats={["avif", "webp"]}
-      src={imageUrl}
-      alt={alt || ""}
+    <picture class={classPicture}>
+      <img src={imageUrl} class={classImg} alt={alt || ""} loading="lazy" decoding="async" />
+    </picture>
+  )
+}
     />
   )
 }

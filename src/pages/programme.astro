@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+import { getAllArtists, formatHeure, formatJour } from '../../backend/backend.mjs';
+import Telechargement from '../assets/icons/telechargement.svg';
+import droneImg from '../assets/image/drone1.avif';
+
+const artists = (await getAllArtists()) ?? [];
+
+// Regroupement des artistes par jour
+const grouped = new Map<string, typeof artists>();
+for (const a of artists) {
+  const key = formatJour(a.date);
+  if (!grouped.has(key)) grouped.set(key, []);
+  grouped.get(key)!.push(a);
+}
+
+// Dates de début et fin pour l'encart info
+const premierArtiste = artists[0];
+const dernierArtiste = artists[artists.length - 1];
+---
+
+<Layout>
+  <!-- ─── Hero ─── -->
+  <section class="relative flex min-h-[50vh] flex-col items-center justify-center gap-8 px-6 pb-12 pt-32 text-center">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src={droneImg.src} alt="" class="h-full w-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex flex-col items-center gap-6">
+      <h1 class="text-white">Programme Complet</h1>
+      <Button href="/programme.pdf" variant="default">
+        <Telechargement />
+        Télécharger le programme
+      </Button>
+    </div>
+  </section>
+
+  <!-- ─── Info programmation ─── -->
+  {(premierArtiste || dernierArtiste) && (
+    <section class="bg-white px-6 py-8 flex flex-col gap-1">
+      <p class="text-normal-2 font-semibold text-dark">La Programmation</p>
+      {premierArtiste && (
+        <p class="text-petit text-dark/70">
+          Début : <span class="capitalize">{formatJour(premierArtiste.date)}</span> {formatHeure(premierArtiste.date)}
+        </p>
+      )}
+      {dernierArtiste && (
+        <p class="text-petit text-dark/70">
+          Fin : <span class="capitalize">{formatJour(dernierArtiste.date)}</span> {formatHeure(dernierArtiste.date)}
+        </p>
+      )}
+    </section>
+  )}
+
+  <!-- ─── Programme par jour ─── -->
+  <section class="bg-white py-10 flex flex-col gap-10">
+    {[...grouped.entries()].map(([jour, actes]) => (
+      <div class="flex flex-col gap-6">
+
+        <!-- En-tête du jour -->
+        <div class="flex justify-center px-6">
+          <span class="rounded-full bg-green px-8 py-3 text-normal-2 font-bold text-dark capitalize">
+            {jour}
+          </span>
+        </div>
+
+        <!-- Liste des artistes (grille desktop) -->
+        <div class="grille flex flex-col gap-0">
+          {actes.map((a) => (
+            <div class="flex flex-col gap-1 border-b border-dark/10 px-0 py-4 first:border-t first:border-dark/10">
+              <p class="text-normal-2 font-semibold text-dark">
+                {a.nom} - {formatHeure(a.date)}
+              </p>
+              <p class="text-petit text-dark/60">{a.scene}</p>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    ))}
+
+    {artists.length === 0 && (
+      <p class="px-6 text-petit text-dark/50">Aucun artiste programmé pour le moment.</p>
+    )}
+  </section>
+</Layout>

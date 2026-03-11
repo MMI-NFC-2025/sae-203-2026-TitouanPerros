@@ -96,3 +96,20 @@ export async function upsertArtist(artist) {
 export function getFileURL(record, field, thumb) {
   return field ? pb.files.getURL(record, field, { thumb }) : null;
 }
+
+// Formate l'heure depuis une date PocketBase → "18 h" ou "18h30"
+export function formatHeure(dateStr) {
+  const d = new Date(dateStr);
+  const h = d.getHours();
+  const min = d.getMinutes();
+  return min > 0 ? `${h}h${String(min).padStart(2, '0')}` : `${h} h`;
+}
+
+// Formate le jour depuis une date PocketBase → "samedi 7 juin"
+export function formatJour(dateStr) {
+  return new Date(dateStr).toLocaleDateString('fr-FR', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  });
+}

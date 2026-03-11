@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardArtiste from '../components/CardArtiste.astro';
+import { getAllArtistsSorted } from '../../backend/backend.mjs';
+import claquettImg from '../assets/image/claquett1.avif';
+
+const artists = (await getAllArtistsSorted()) ?? [];
+---
+
+<Layout>
+  <!-- ─── Hero ─── -->
+  <section class="relative flex min-h-[50vh] flex-col items-center justify-center px-6 pb-12 pt-32 text-center">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src={claquettImg.src} alt="" class="h-full w-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex flex-col items-center gap-4">
+      <h1 class="text-white">Les Artistes</h1>
+    </div>
+  </section>
+
+  <!-- ─── Grille des artistes ─── -->
+  <section class="bg-white py-12 flex flex-col gap-8">
+    <div class="grille flex flex-col gap-6">
+      {artists.map((artist) => (
+        <CardArtiste
+          record={artist}
+          nom={artist.nom}
+          scene={artist.scene}
+          genre={artist.genre}
+          date={artist.date}
+          photo={artist.photo}
+        />
+      ))}
+    </div>
+
+    {artists.length === 0 && (
+      <p class="px-6 text-petit text-white/40">Aucun artiste pour le moment.</p>
+    )}
+  </section>
+</Layout>

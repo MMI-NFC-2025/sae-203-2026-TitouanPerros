@@ -1,0 +1,48 @@
+---
+import { formatHeure, formatJour } from '../../backend/backend.mjs';
+import ImagePb from './ImagePb.astro';
+
+interface Props {
+  record: Record<string, unknown>;
+  nom: string;
+  scene: string;
+  genre?: string;
+  date?: string;
+  photo?: string;
+}
+
+const { record, nom, scene, genre, date, photo } = Astro.props;
+const jourHeure = date
+  ? `${formatJour(date as string)} ${formatHeure(date as string)}`
+  : null;
+---
+
+<article class="flex flex-col overflow-hidden rounded-2xl">
+  <!-- Header sombre -->
+  <div class="flex flex-col gap-1 bg-dark px-4 py-4">
+    <p class="text-sous-titre font-bold text-white leading-tight">{nom}</p>
+    <div class="flex items-center justify-between gap-2">
+      <div class="flex flex-col gap-0.5">
+        {jourHeure && (
+          <p class="text-petit text-white/70 capitalize">{jourHeure}</p>
+        )}
+        {scene && (
+          <p class="text-petit text-white/50">{scene}</p>
+        )}
+      </div>
+      {genre && (
+        <span class="shrink-0 text-petit font-bold tracking-widest uppercase text-white/60">
+          {genre}
+        </span>
+      )}
+    </div>
+  </div>
+
+  <!-- Photo -->
+  <div class="aspect-[3/4] w-full overflow-hidden bg-dark/10">
+    {photo
+      ? <ImagePb record={record} field={photo} alt={nom} classImg="h-full w-full object-cover" thumb="600x600" />
+      : <div class="flex h-full w-full items-center justify-center text-dark/20 text-5xl">♪</div>
+    }
+  </div>
+</article>
