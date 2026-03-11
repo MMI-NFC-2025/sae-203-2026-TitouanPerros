@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import FormContact from '../components/FormContact.astro';
+import { submitContact } from '../../backend/backend.mjs';
+import heroImg from '../assets/image/image17.avif';
+import Mail from '../assets/icons/mail.svg';
+import Telephone from '../assets/icons/telephone.svg';
+import Map from '../assets/icons/map.svg';
+import Insta from '../assets/icons/instagram.svg';
+import Facebook from '../assets/icons/facebook.svg';
+
+// Gestion du formulaire POST
+let formSuccess = false;
+let formError: string | undefined;
+
+if (Astro.request.method === 'POST') {
+  try {
+    const data = await Astro.request.formData();
+    const nom     = String(data.get('nom')     ?? '').trim();
+    const email   = String(data.get('email')   ?? '').trim();
+    const sujet   = String(data.get('sujet')   ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    const result = await submitContact({ nom, email, sujet, message });
+    if (result.success) {
+      formSuccess = true;
+    } else {
+      formError = result.error;
+    }
+  } catch (e: unknown) {
+    formError = e instanceof Error ? e.message : 'Erreur inconnue';
+  }
+}
+---
+
+<Layout>
+  <!-- ─── Hero ─── -->
+  <section class="relative flex min-h-[50vh] flex-col items-center justify-center px-6 pb-12 pt-32 text-center">
+    <img src={heroImg.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex flex-col items-center gap-4">
+      <h1 class="text-white">Contact</h1>
+      <p class="text-normal-2 text-white/70">Nous sommes à votre écoute</p>
+    </div>
+  </section>
+
+  <!-- ─── Infos de contact + Formulaire ─── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-10 lg:max-w-2xl lg:mx-auto">
+
+    <!-- Coordonnées -->
+    <div class="flex flex-col gap-6">
+      <h2 class="m-0 text-dark">Nos coordonnées</h2>
+
+      <div class="flex flex-col gap-5">
+        <a href="mailto:flyingtapfest@gmail.com" class="flex items-start gap-4 hover:text-green transition">
+          <Mail class="shrink-0 mt-0.5 text-dark/70" />
+          <div class="flex flex-col gap-0.5">
+            <span class="text-petit font-bold text-dark">Email</span>
+            <span class="text-petit text-dark/60">flyingtapfest@gmail.com</span>
+          </div>
+        </a>
+
+        <a href="tel:0654875487" class="flex items-start gap-4 hover:text-green transition">
+          <Telephone class="shrink-0 mt-0.5 text-dark/70" />
+          <div class="flex flex-col gap-0.5">
+            <span class="text-petit font-bold text-dark">Téléphone</span>
+            <span class="text-petit text-dark/60">06 54 87 54 87</span>
+          </div>
+        </a>
+
+        <div class="flex items-start gap-4">
+          <Map class="shrink-0 mt-0.5 text-red-500" />
+          <div class="flex flex-col gap-0.5">
+            <span class="text-petit font-bold text-dark">Adresse</span>
+            <span class="text-petit text-dark/60">Parc Près la rose Montbéliard</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Réseaux sociaux -->
+      <div class="flex flex-col gap-3">
+        <p class="text-petit font-semibold text-dark">Nos réseaux sociaux</p>
+        <div class="flex gap-3">
+          <a href="https://instagram.com" aria-label="Instagram" class="text-dark/70 hover:text-green transition">
+            <Insta class="h-8 w-8" />
+          </a>
+          <a href="https://facebook.com" aria-label="Facebook" class="text-dark/70 hover:text-green transition">
+            <Facebook class="h-8 w-8" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="flex flex-col gap-4">
+      <FormContact success={formSuccess} error={formError} />
+    </div>
+
+  </section>
+
+</Layout>

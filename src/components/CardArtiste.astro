@@ -9,14 +9,17 @@ interface Props {
   genre?: string;
   date?: string;
   photo?: string;
+  description?: string;
 }
 
-const { record, nom, scene, genre, date, photo } = Astro.props;
+const { record, nom, scene, genre, date, photo, description } = Astro.props;
 const jourHeure = date
   ? `${formatJour(date as string)} ${formatHeure(date as string)}`
   : null;
+const href = `/artistes/${encodeURIComponent(nom)}`;
 ---
 
+<a href={href} class="group flex flex-col overflow-hidden rounded-2xl transition hover:opacity-90">
 <article class="flex flex-col overflow-hidden rounded-2xl">
   <!-- Header sombre -->
   <div class="flex flex-col gap-1 bg-dark px-4 py-4">
@@ -45,4 +48,12 @@ const jourHeure = date
       : <div class="flex h-full w-full items-center justify-center text-dark/20 text-5xl">♪</div>
     }
   </div>
+
+  <!-- Description courte -->
+  {description && (
+    <div class="bg-white px-4 py-3">
+      <p class="text-petit text-dark/60 line-clamp-3 leading-relaxed">{description}</p>
+    </div>
+  )}
 </article>
+</a>

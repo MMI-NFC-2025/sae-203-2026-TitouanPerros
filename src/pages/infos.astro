@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardFaq from '../components/CardFaq.astro';
+import droneImg from '../assets/image/disneyinteldrone1.avif';
+---
+
+<Layout>
+  <!-- ─── Hero ─── -->
+  <section class="relative flex min-h-[50vh] flex-col items-center justify-center px-6 pb-12 pt-32 text-center">
+    <img src={droneImg.src} alt="" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="relative z-10 flex flex-col items-center gap-4">
+      <h1 class="text-white">Infos Pratiques</h1>
+      <p class="text-normal-2 text-white/70">Tout savoir pour préparer votre venue</p>
+    </div>
+  </section>
+
+  <!-- ─── Tarifs ─── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <h2 class="text-dark m-0">Tarifs &amp; Billeterie</h2>
+    <div class="grille flex flex-col gap-4">
+
+      <!-- Pass 1 jour — fond blanc, bordure -->
+      <div class="flex flex-col gap-4 rounded-2xl border border-dark/15 bg-white p-6">
+        <div class="flex flex-col gap-1">
+          <p class="text-normal-2 font-bold text-dark">Pass 1 jour</p>
+          <p class="text-petit text-dark/50">valable 1 jour : samedi ou dimanche</p>
+        </div>
+        <p class="text-4xl font-bold text-dark">35 €</p>
+        <a
+          href="https://billetterie.flyingtapfest.fr"
+          class="flex w-full items-center justify-center rounded-full bg-green py-4 text-normal-2 font-bold text-dark transition hover:opacity-90"
+        >
+          Acheter
+        </a>
+      </div>
+
+      <!-- Pass 2 jours — fond vert -->
+      <div class="flex flex-col gap-4 rounded-2xl bg-green p-6">
+        <div class="flex flex-col gap-1">
+          <p class="text-normal-2 font-bold text-white">Pass 2 jours</p>
+          <p class="text-petit text-white/70">valable samedi et dimanche</p>
+        </div>
+        <p class="text-4xl font-bold text-white">60 €</p>
+        <a
+          href="https://billetterie.flyingtapfest.fr"
+          class="flex w-full items-center justify-center rounded-full bg-white py-4 text-normal-2 font-bold text-dark transition hover:opacity-90"
+        >
+          Acheter
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Hébergements ─── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <h2 class="text-dark m-0">Hébergements</h2>
+    <div class="grille flex flex-col gap-4">
+
+      <!-- Hôtels -->
+      <div class="flex flex-col gap-3 rounded-2xl border border-dark/10 bg-white p-6">
+        <p class="text-normal-2 font-bold text-dark">Hotels</p>
+        <p class="text-petit leading-relaxed text-dark/70">
+          de nombreux hotels sont disponibles à proximité du parc près la rose
+        </p>
+        <ul class="flex flex-col gap-1">
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">Ibis Budget Montbéliard</li>
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">The original Boutique</li>
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">Kyriad Montbéliard</li>
+        </ul>
+      </div>
+
+      <!-- Camping -->
+      <div class="flex flex-col gap-3 rounded-2xl border border-dark/10 bg-white p-6">
+        <p class="text-normal-2 font-bold text-dark">Camping</p>
+        <p class="text-petit leading-relaxed text-dark/70">
+          Pour une expérience unique découvrez le camping du parc
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Comment venir ? ─── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <h2 class="text-dark m-0">Comment venir ?</h2>
+    <div class="grille flex flex-col gap-4">
+
+      <!-- En bus -->
+      <div class="flex flex-col gap-3 rounded-2xl border border-dark/10 bg-white p-6">
+        <p class="text-normal-2 font-bold text-dark">En bus</p>
+        <p class="text-petit leading-relaxed text-dark/70">
+          Le moyen le plus simple et rapide pour accéder au festival
+        </p>
+        <ul class="flex flex-col gap-2">
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">ligne 2 direction couteau jouvent</li>
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">ligne 3 direction couteau jouvent</li>
+        </ul>
+      </div>
+
+      <!-- En voiture -->
+      <div class="flex flex-col gap-3 rounded-2xl border border-dark/10 bg-white p-6">
+        <p class="text-normal-2 font-bold text-dark">En voiture</p>
+        <p class="text-petit leading-relaxed text-dark/70">
+          Plusieurs parking sont disponible à proximité du festival
+        </p>
+        <ul class="flex flex-col gap-2">
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">Parking parc près la rose</li>
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">Parking du chateau</li>
+          <li class="text-petit text-dark/50 before:mr-1 before:content-['.']">Parking de la gare</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section class="bg-white px-6 py-12 flex flex-col gap-6">
+    <h2 class="text-dark m-0">FAQ</h2>
+    <div class="flex flex-col divide-y-0 rounded-2xl border border-dark/10 px-6">
+      <CardFaq question="Peut-on entrer et sortir librement du festival ?">
+        Oui, votre billet vous permet des entrées et sorties multiples durant la journée. Conservez votre bracelet.
+      </CardFaq>
+      <CardFaq question="Les animaux sont-ils acceptés ?">
+        Les animaux de compagnie ne sont pas admis sur le site du festival, à l'exception des chiens guides pour les personnes malvoyantes.
+      </CardFaq>
+      <CardFaq question="Puis-je apporter ma propre nourriture et boissons ?">
+        Les pique-niques sont autorisés dans les zones dédiées. Toutefois, les bouteilles en verre et canettes sont interdites. Des restaurateurs seront présents sur place.
+      </CardFaq>
+      <CardFaq question="Y a-t-il une limite d'âge ?">
+        Le festival est ouvert à tous les âges. Les mineurs de moins de 16 ans doivent être accompagnés d'un adulte.
+      </CardFaq>
+      <CardFaq question="Que faire en cas de perte ou vol ?">
+        Rendez-vous au point d'accueil principal situé à l'entrée du parc. Une équipe de sécurité est disponible 24h/24 pendant le festival.
+      </CardFaq>
+      <CardFaq question="Comment obtenir un remboursement ?">
+        Les billets sont remboursables jusqu'à 15 jours avant l'événement. Contactez-nous par e-mail à flyingtapfest@gmail.com.
+      </CardFaq>
+    </div>
+  </section>
+</Layout>

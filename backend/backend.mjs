@@ -113,3 +113,25 @@ export function formatJour(dateStr) {
     month: 'long',
   });
 }
+
+// Fonction 9 : retourne un artiste à partir de son nom exact
+export async function getArtistByName(nom) {
+  try {
+    const artist = await pb.collection('artiste').getFirstListItem(`nom = "${nom}"`);
+    return artist;
+  } catch (error) {
+    console.error('Erreur lors de la récupération de l\'artiste par nom :', error);
+    return null;
+  }
+}
+
+// Fonction 10 : enregistre un message de contact dans PocketBase
+export async function submitContact({ nom, email, sujet, message }) {
+  try {
+    const record = await pb.collection('contact').create({ nom, email, sujet, message });
+    return { success: true, record };
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi du message :', error);
+    return { success: false, error: error.message };
+  }
+}

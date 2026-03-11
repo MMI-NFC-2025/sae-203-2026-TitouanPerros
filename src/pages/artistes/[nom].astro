@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ImagePb from '../../components/ImagePb.astro';
+import {
+  getArtistByName,
+  getFileURL,
+  formatHeure,
+  formatJour,
+} from '../../../backend/backend.mjs';
+
+const { nom } = Astro.params;
+const artistName = decodeURIComponent(nom ?? '');
+
+const artist = await getArtistByName(artistName);
+
+if (!artist) {
+  return Astro.redirect('/artistes');
+}
+
+const jourHeure = artist.date
+  ? `${formatJour(artist.date)} — ${formatHeure(artist.date)}`
+  : null;
+
+// La galerie est un tableau de noms de fichiers
+const galerie: string[] = Array.isArray(artist.gallerie)
+  ? artist.gallerie
+  : artist.gallerie
+  ? [artist.gallerie]
+  : [];
+---
+
+<Layout>
+  <!-- ─── Hero : photo principale + nom en overlay ─── -->
+  <section class="relative flex min-h-[65vh] flex-col items-center justify-end px-6 pb-14 pt-32 text-center">
+    {artist.photo
+      ? <ImagePb
+          record={artist}
+          field={artist.photo}
+          alt={artist.nom}
+          classPicture="absolute inset-0"
+          classImg="h-full w-full object-cover"
+          thumb="1200x0"
+        />
+      : <div class="absolute inset-0 bg-dark"></div>
+    }
+    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+
+    <div class="relative z-10 flex flex-col items-center gap-4">
+      {artist.genre && (
+        <span class="rounded-full bg-green px-4 py-1 text-petit font-bold uppercase tracking-widest text-dark">
+          {artist.genre}
+        </span>
+      )}
+      <h1 class="text-white">{artist.nom}</h1>
+      {jourHeure && (
+        <p class="text-normal-2 capitalize text-white/70">{jourHeure}</p>
+      )}
+      {artist.scene && (
+        <p class="text-petit text-white/50">{artist.scene}</p>
+      )}
+    </div>
+  </section>
+
+  <!-- ─── Description ─── -->
+  {artist.description && (
+    <section class="bg-white px-6 py-12">
+      <div class="mx-auto max-w-2xl flex flex-col gap-4">
+        <h2 class="text-dark">À propos</h2>
+        <p class="text-normal-2 leading-relaxed text-dark/70">{artist.description}</p>
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Galerie ─── -->
+  {galerie.length > 0 && (
+    <section class="bg-white px-6 py-12 flex flex-col gap-8">
+      <h2 class="text-dark">Galerie</h2>
+      <div class="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-6">
+        {galerie.map((fichier) => (
+          <div class="aspect-square overflow-hidden rounded-xl">
+            <ImagePb
+              record={artist}
+              field={fichier}
+              alt={artist.nom}
+              classImg="h-full w-full object-cover"
+              thumb="600x600"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Retour ─── -->
+  <section class="bg-white px-6 pb-16">
+    <a
+      href="/artistes"
+      class="inline-flex items-center gap-2 text-petit font-semibold text-dark/50 hover:text-green transition"
+    >
+      ← Retour aux artistes
+    </a>
+  </section>
+</Layout>

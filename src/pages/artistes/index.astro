@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CardArtiste from '../components/CardArtiste.astro';
-import { getAllArtistsSorted } from '../../backend/backend.mjs';
-import claquettImg from '../assets/image/claquett1.avif';
+import Layout from '../../layouts/Layout.astro';
+import CardArtiste from '../../components/CardArtiste.astro';
+import { getAllArtistsSorted } from '../../../backend/backend.mjs';
+import claquettImg from '../../assets/image/claquett1.avif';
 
 const artists = (await getAllArtistsSorted()) ?? [];
 ---

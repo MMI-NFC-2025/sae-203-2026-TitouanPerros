@@ -1,0 +1,94 @@
+---
+import Envoyer from '../assets/icons/envoyer.svg';
+
+interface Props {
+  success?: boolean;
+  error?: string;
+}
+const { success = false, error } = Astro.props;
+---
+
+<div class="flex flex-col gap-5 rounded-2xl border border-dark/10 bg-white p-6 shadow-sm">
+  <p class="text-normal-2 font-bold text-dark">Formulaire de contact</p>
+
+  <form method="POST" class="flex flex-col gap-4">
+
+    <!-- Nom complet -->
+    <div class="flex flex-col gap-1.5">
+      <label for="nom" class="text-petit font-semibold text-dark">Nom complet</label>
+      <input
+        id="nom"
+        name="nom"
+        type="text"
+        required
+        placeholder="Votre nom"
+        class="rounded-2xl border border-dark/15 bg-white px-4 py-3 text-petit text-dark placeholder:text-dark/20 outline-none focus:border-green transition"
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="flex flex-col gap-1.5">
+      <label for="email" class="text-petit font-semibold text-dark">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        required
+        placeholder="Votre@email.com"
+        class="rounded-2xl border border-dark/15 bg-white px-4 py-3 text-petit text-dark placeholder:text-dark/20 outline-none focus:border-green transition"
+      />
+    </div>
+
+    <!-- Sujet -->
+    <div class="flex flex-col gap-1.5">
+      <label for="sujet" class="text-petit font-semibold text-dark">Sujet</label>
+      <input
+        id="sujet"
+        name="sujet"
+        type="text"
+        required
+        placeholder=""
+        class="rounded-2xl border border-dark/15 bg-white px-4 py-3 text-petit text-dark placeholder:text-dark/20 outline-none focus:border-green transition"
+      />
+    </div>
+
+    <!-- Message -->
+    <div class="flex flex-col gap-1.5">
+      <label for="message" class="text-petit font-semibold text-dark">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        required
+        rows="5"
+        placeholder="Votre message."
+        class="resize-none rounded-2xl border border-dark/15 bg-white px-4 py-3 text-petit text-dark placeholder:text-dark/20 outline-none focus:border-green transition"
+      ></textarea>
+    </div>
+
+    <!-- Retour -->
+    {success && (
+      <p class="rounded-xl bg-green/15 px-4 py-3 text-petit font-semibold text-green">
+        ✓ Votre message a bien été envoyé, nous vous répondrons bientôt.
+      </p>
+    )}
+    {error && (
+      <p class="rounded-xl bg-red-50 px-4 py-3 text-petit font-semibold text-red-600">
+        Une erreur est survenue : {error}
+      </p>
+    )}
+
+    <!-- Bouton centré -->
+    <div class="flex justify-center pt-1">
+      <button
+        type="submit"
+        class="inline-flex items-center gap-3 rounded-full bg-green px-8 py-3 text-petit font-bold text-dark transition hover:opacity-90"
+      >
+        <Envoyer />
+        Envoyer
+      </button>
+    </div>
+
+  </form>
+</div>
+
+</form>
