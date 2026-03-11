@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardScene from '../components/CardScene.astro';
+import { getAllScenes, getArtistsBySceneName } from '../../backend/backend.mjs';
+import parcImg from '../assets/image/parc 1.png';
+
+const scenes = (await getAllScenes()) ?? [];
+
+// Pour chaque scène, on récupère ses artistes triés par date
+const scenesWithArtists = await Promise.all(
+  scenes.map(async (scene) => {
+    const artists = (await getArtistsBySceneName(scene.nom)) ?? [];
+    return { scene, artists };
+  })
+);
+---
+
+<Layout>
+  <!-- ─── Hero ─── -->
+  <section class="relative flex min-h-[40vh] flex-col items-center justify-center px-6 pb-12 pt-32 text-center">
+    <div class="absolute inset-0 overflow-hidden">
+      <img src={parcImg.src} alt="" class="h-full w-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10">
+      <h1 class="text-white">La Scène</h1>
+    </div>
+  </section>
+
+  <!-- ─── Intro ─── -->
+  <section class="bg-white px-6 py-10">
+    <p class="text-normal-2 leading-relaxed text-dark/80">
+      Les scènes du Flying TapFest vous offrira une atmosphère chaleureuse grâce à son cadre
+      unique : le parc Le Pré La Rose. Vous y découvrirez des performances inoubliables
+      portées par des artistes de renom.
+    </p>
+  </section>
+
+  <!-- ─── Grille des scènes ─── -->
+  <section class="bg-white pb-16 flex flex-col gap-10">
+    <div class="grille flex flex-col gap-10">
+      {scenesWithArtists.map(({ scene, artists }) => (
+        <CardScene
+          record={scene}
+          nom={scene.nom}
+          description={scene.description}
+          capacite={scene.capacite}
+          photo={scene.photo}
+          artists={artists}
+        />
+      ))}
+    </div>
+
+    {scenes.length === 0 && (
+      <p class="px-6 text-petit text-dark/40">Aucune scène pour le moment.</p>
+    )}
+  </section>
+</Layout>

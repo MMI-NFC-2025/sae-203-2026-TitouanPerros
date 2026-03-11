@@ -1,0 +1,71 @@
+---
+import ImagePb from './ImagePb.astro';
+import { formatHeure, formatJour } from '../../backend/backend.mjs';
+
+interface Props {
+  record: Record<string, unknown>;
+  nom: string;
+  description?: string;
+  capacite?: string | number;
+  photo?: string;
+  artists: Record<string, unknown>[];
+}
+
+const { record, nom, description, capacite, photo, artists } = Astro.props;
+
+// Regroupement des artistes par jour
+const grouped = new Map<string, typeof artists>();
+for (const a of artists) {
+  const key = formatJour(a.date as string);
+  if (!grouped.has(key)) grouped.set(key, []);
+  grouped.get(key)!.push(a);
+}
+---
+
+<article class="flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm">
+  <!-- Photo -->
+  {photo && (
+    <div class="w-full overflow-hidden">
+      <ImagePb
+        record={record}
+        field={photo}
+        alt={nom}
+        classImg="w-full object-cover aspect-video"
+      />
+    </div>
+  )}
+
+  <!-- Contenu -->
+  <div class="flex flex-col gap-4 p-6">
+    <!-- Nom + capacité -->
+    <div class="flex items-baseline justify-between gap-4">
+      <p class="text-sous-titre font-bold text-dark">{nom}</p>
+      {capacite && (
+        <p class="text-petit text-dark/50 shrink-0">{capacite} personnes</p>
+      )}
+    </div>
+
+    <!-- Description -->
+    {description && (
+      <p class="text-petit leading-relaxed text-dark/70">{description}</p>
+    )}
+
+    <!-- Artistes -->
+    {artists.length > 0 && (
+      <div class="flex flex-col gap-3">
+        <p class="text-petit font-semibold text-dark">Artistes sur cette scène :</p>
+
+        {[...grouped.entries()].map(([jour, actes]) => (
+          <div class="flex flex-col gap-1">
+            <p class="text-petit font-semibold text-dark/80 capitalize">Le {jour}</p>
+            {actes.map((a) => (
+              <p class="text-petit text-dark/50">
+                {a.nom} {formatHeure(a.date as string)}
+              </p>
+            ))}
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</article>
