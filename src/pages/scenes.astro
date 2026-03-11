@@ -1,23 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CardScene from '../components/CardScene.astro';
-import { getAllScenes, getArtistsBySceneName } from '../../backend/backend.mjs';
+import { getAllScenes, getAllArtists } from '../../backend/backend.mjs';
 import parcImg from '../assets/image/parc 1.png';
 
 const scenes = (await getAllScenes()) ?? [];
+const allArtists = (await getAllArtists()) ?? [];
 
-// Pour chaque scène, on récupère ses artistes triés par date
-const scenesWithArtists = await Promise.all(
-  scenes.map(async (scene) => {
-    const artists = (await getArtistsBySceneName(scene.nom)) ?? [];
-    return { scene, artists };
-  })
-);
+// Regroupement client-side : insensible à la casse et aux espaces
+const normalize = (s: string) => s?.trim().toLowerCase() ?? '';
+
+const scenesWithArtists = scenes.map((scene) => ({
+  scene,
+  artists: allArtists.filter(
+    (a) => normalize(a.scene as string) === normalize(scene.nom as string)
+  ),
+}));
 ---
 
 <Layout>
   <!-- ─── Hero ─── -->
-  <section class="relative flex min-h-[40vh] flex-col items-center justify-center px-6 pb-12 pt-32 text-center">
+  <section class="relative flex min-h-[40vh] flex-col items-center justify-center px-6 py-12 text-center">
     <div class="absolute inset-0 overflow-hidden">
       <img src={parcImg.src} alt="" class="h-full w-full object-cover" />
     </div>
@@ -38,7 +41,7 @@ const scenesWithArtists = await Promise.all(
 
   <!-- ─── Grille des scènes ─── -->
   <section class="bg-white pb-16 flex flex-col gap-10">
-    <div class="grille flex flex-col gap-10">
+    <div class="flex flex-col gap-10 px-6 lg:grid lg:grid-cols-3 lg:gap-8 lg:max-w-5xl lg:mx-auto lg:w-full">
       {scenesWithArtists.map(({ scene, artists }) => (
         <CardScene
           record={scene}

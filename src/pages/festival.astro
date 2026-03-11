@@ -4,7 +4,10 @@ import Hero from '../components/Hero.astro';
 import Card from '../components/Card.astro';
 import Logo from '../assets/icons/logo.svg';
 import Equipe from '../assets/icons/equipe.svg';
-import Valeur from '../assets/icons/valeur.svg';
+import Valeur from '../assets/icons/image 7.svg';
+import teamImg031 from '../assets/image/team_img_031.avif';
+import teamImg041 from '../assets/image/team_img_041.avif';
+import teamImg021 from '../assets/image/team_img_021.avif';
 ---
 
 <Layout>
@@ -45,7 +48,7 @@ import Valeur from '../assets/icons/valeur.svg';
       <Card
         horizontal
         variant="team"
-        imageSrc="https://i.pravatar.cc/150?img=47"
+        imageSrc={teamImg031.src}
         imageAlt="Portrait de Marie Collin"
         title="Marie Collin"
         subtitle="Directrice Artistique"
@@ -53,7 +56,7 @@ import Valeur from '../assets/icons/valeur.svg';
       <Card
         horizontal
         variant="team"
-        imageSrc="https://i.pravatar.cc/150?img=12"
+        imageSrc={teamImg041.src}
         imageAlt="Portrait de Luis Miguel"
         title="Luis Miguel"
         subtitle="Directeur technique"
@@ -61,7 +64,7 @@ import Valeur from '../assets/icons/valeur.svg';
       <Card
         horizontal
         variant="team"
-        imageSrc="https://i.pravatar.cc/150?img=15"
+        imageSrc={teamImg021.src}
         imageAlt="Portrait de Maxime Julio"
         title="Maxime Julio"
         subtitle="Responsable communication"
