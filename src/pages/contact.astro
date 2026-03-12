@@ -52,21 +52,21 @@ if (Astro.request.method === 'POST') {
       <h2 class="m-0 text-dark">Nos coordonnées</h2>
 
       <div class="flex flex-col gap-5">
-        <a href="mailto:flyingtapfest@gmail.com" class="flex items-start gap-4 hover:text-green transition">
+        <div class="flex items-start gap-4">
           <Mail class="h-10 w-10 shrink-0 mt-0.5 text-dark/70" />
           <div class="flex flex-col gap-0.5">
             <span class="text-petit font-bold text-dark">Email</span>
             <span class="text-petit text-dark/60">flyingtapfest@gmail.com</span>
           </div>
-        </a>
+        </div>
 
-        <a href="tel:0654875487" class="flex items-start gap-4 hover:text-green transition">
+        <div class="flex items-start gap-4">
           <Telephone class="h-10 w-10 shrink-0 mt-0.5 text-dark/70" />
           <div class="flex flex-col gap-0.5">
             <span class="text-petit font-bold text-dark">Téléphone</span>
             <span class="text-petit text-dark/60">06 54 87 54 87</span>
           </div>
-        </a>
+        </div>
 
         <div class="flex items-start gap-4">
           <Map class="h-10 w-10 shrink-0 mt-0.5 text-red-500" />

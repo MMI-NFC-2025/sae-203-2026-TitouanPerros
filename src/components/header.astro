@@ -4,7 +4,7 @@ import Logo from '../assets/icons/logo.svg';
 <header class="header sticky top-0 bg-black w-full flex items-center justify-between px-6 lg:grid lg:grid-cols-8 z-100"> 
   <div class="py-8 lg:col-start-1 lg:col-span-4">
     <a href="/" aria-label="Accueil" class="flex flex-row gap-3 items-center">
-      <Logo />
+      <Logo aria-hidden="true" />
       <p class="text-white text-base">Flying Tap Fest</p>
     </a>
   </div>
@@ -28,10 +28,11 @@ import Logo from '../assets/icons/logo.svg';
     <nav
       class="fixed inset-0 z-50 bg-black text-2xl text-white transition-all duration-300 ease-in-out invisible opacity-0 aria-[hidden=false]:visible aria-[hidden=false]:opacity-100"
       id="menu"
+      aria-label="Navigation principale"
       aria-hidden="true"
     >
       <div class="mx-8 mt-8 flex flex-row gap-3 items-center">
-        <Logo class="w-10 h-10" />
+        <Logo class="w-10 h-10" aria-hidden="true" />
         <p class="text-white text-base">Flying Tap Fest</p>
       </div>
       <ul class="mx-16 mt-16">

@@ -20,8 +20,8 @@ import Fleche from '../assets/icons/arrow1.svg';
         <Button href="/programme" text="Le programme" variant="outlined" classes="mx-auto" />
       </div>
     </div>
-    <Button href="/programme" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0">
-    <Ticket/>
+    <Button href="/programme" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0" ariaLabel="Réserver un billet">
+    <Ticket aria-hidden="true" />
     </Button>
   </section>
 
@@ -47,11 +47,11 @@ import Fleche from '../assets/icons/arrow1.svg';
     <div class="absolute inset-0 bg-black/40"></div>
     <div class="relative z-10 flex h-full min-h-64 flex-col items-start justify-end gap-4 p-6">
     <Button href="/programme" text="Réserver vos billets">
-      <Ticket />
+      <Ticket aria-hidden="true" />
     </Button>
     </div>
-    <Button href="#top" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0">
-    <Fleche />
+    <Button href="#top" variant="default" classes="absolute bottom-6 right-6 z-60 !h-12 !w-12 !p-0" ariaLabel="Retour en haut de la page">
+    <Fleche aria-hidden="true" />
     </Button>
   </section>
 

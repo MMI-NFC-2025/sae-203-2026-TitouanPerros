@@ -1,5 +1,5 @@
 ---
-const { href, text, variant = "default", classes } = Astro.props;
+const { href, text, variant = "default", classes, ariaLabel } = Astro.props;
 const variantClass = {
   default: "bg-green text-dark",
   outlined: "text-white border border-white hover:inset-ring-8 hover:inset-ring-white",
@@ -11,6 +11,7 @@ const currentVariant =
 ---
 
 <a
+  aria-label={ariaLabel}
   class:list={[
     "inline-flex w-fit items-center justify-center gap-4 whitespace-nowrap text-center px-6 py-4 text-xs font-bold tracking-wide transition duration-200 ease-in-out rounded-full lg:px-8 lg:py-6 lg:text-sm hover:scale-105 active:scale-95",
     variantClass[currentVariant],
