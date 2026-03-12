@@ -44,14 +44,5 @@
     @apply px-6 lg:grid lg:grid-cols-(--my-grid) lg:justify-center lg:gap-12;
   }
 
-  .nav-link {
-    @apply relative;
-  }
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-2 left-5 h-0.5 w-0 bg-green transition-all duration-300;
-  }
-  .nav-link:hover::after {
-    @apply w-[calc(100%-2.5rem)];
-  }
+
 }
