@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
+---
+
+<Layout>
+  <section class="relative flex min-h-screen flex-col items-center justify-center gap-8 px-6 text-center bg-dark">
+    <p class="text-[10rem] font-bold leading-none text-green opacity-20 select-none absolute">404</p>
+    <div class="relative z-10 flex flex-col items-center gap-6">
+      <h1 class="text-white">Page introuvable</h1>
+      <p class="text-white/60 max-w-sm">
+        On a cherché partout dans le festival, mais cette page n'existe pas.
+      </p>
+      <Button href="/" text="Retour à l'accueil" />
+    </div>
+  </section>
+</Layout>
