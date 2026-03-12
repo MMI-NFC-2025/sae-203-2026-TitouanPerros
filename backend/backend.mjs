@@ -42,7 +42,7 @@ export async function getArtistsBySceneID(sceneID) {
         const artists = await pb.collection('artiste').getFullList({
             filter: `field = "${sceneID}"`,
             sort: 'date',
-        });
+        });3
         return artists;
 }
 //Fonction 7 : retourne tous les artistes se produisant sur une scène donnée par son nom, triés par date
