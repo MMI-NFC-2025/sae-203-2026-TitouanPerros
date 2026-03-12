@@ -19,7 +19,7 @@ const jourHeure = date
 const href = `/artistes/${slugify(nom)}`;
 ---
 
-<a href={href} class="group flex flex-col overflow-hidden rounded-2xl transition hover:opacity-90">
+<a href={href} class="group flex flex-col overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/30">
 <article class="flex flex-col overflow-hidden rounded-2xl">
   <!-- Header sombre -->
   <div class="flex flex-col gap-1 bg-dark px-4 py-4">
@@ -44,7 +44,7 @@ const href = `/artistes/${slugify(nom)}`;
   <!-- Photo -->
   <div class="aspect-[3/4] w-full overflow-hidden bg-dark/10">
     {photo
-      ? <ImagePb record={record} field={photo} alt={nom} classImg="h-full w-full object-cover" thumb="600x600" />
+      ? <ImagePb record={record} field={photo} alt={nom} classImg="h-full w-full object-cover transition duration-300 group-hover:scale-105" thumb="600x600" />
       : <div class="flex h-full w-full items-center justify-center text-dark/20 text-5xl">♪</div>
     }
   </div>
